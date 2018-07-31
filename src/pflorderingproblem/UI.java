@@ -43,7 +43,6 @@ public class UI {//implements OrderingListener{
         ui.getPackages();
         ui.createCustomer();
         ui.placeOrder();
-
     }
     
         //method to retrieve the list of available products from the API
@@ -142,58 +141,7 @@ public class UI {//implements OrderingListener{
         String firstName = JOptionPane.showInputDialog(null, "Please enter your first name: ");
         String lastName = JOptionPane.showInputDialog(null, "Please enter your last name: ");
         
-//        JTextField fName = new JTextField(10);
-//        JTextField lName = new JTextField(10);
-//        JTextField compName = new JTextField(10);
-//        JTextField addr = new JTextField(10);
-//        JTextField addr2 = new JTextField(10);
-//        JTextField city = new JTextField(10);
-//        JTextField state = new JTextField(10);
-//        JTextField postCode = new JTextField(10);
-//        JTextField counCode = new JTextField(10);
-//        JTextField email = new JTextField(10);
-//        JTextField phone = new JTextField(10);
-//        
-//        JPanel infoPanel = new JPanel();
-//        infoPanel.add(new JLabel("Please enter your first name: ", SwingConstants.RIGHT));
-//        infoPanel.add(fName);
-//        infoPanel.add(Box.createHorizontalStrut(15));
-//        infoPanel.add(new JLabel("Please enter your last name: "));
-//        infoPanel.add(lName);
-//        infoPanel.add(new JLabel("Please enter your Company name: "));
-//        infoPanel.add(compName);
-//        infoPanel.add(new JLabel("Please enter your Street Address: "));
-//        infoPanel.add(addr);
-//        infoPanel.add(new JLabel("Please enter your Street Address(line 2) (if applicable): "));
-//        infoPanel.add(addr2);
-//        infoPanel.add(new JLabel("Please enter your City: "));
-//        infoPanel.add(city);
-//        infoPanel.add(new JLabel("Please enter your State or its 2 letter abbreviation: "));
-//        infoPanel.add(state);
-//        infoPanel.add(new JLabel("Please enter your Postal Code: "));
-//        infoPanel.add(postCode);
-//        infoPanel.add(new JLabel("Please enter your Country: "));
-//        infoPanel.add(counCode);
-//        infoPanel.add(new JLabel("Please enter your Email Address: "));
-//        infoPanel.add(email);
-//        infoPanel.add(new JLabel("Please enter your Phone number: "));
-//        infoPanel.add(phone);
-//        
-//        String firstName = fName.getText();
-//        String lastName = lName.getText();
-//        
         cust = new Customer(firstName, lastName);
-//        cust.setCompanyName(compName.getText());
-//        cust.setAddress1(addr.getText());
-//        cust.setAddress2(addr2.getText());
-//        cust.setCity(city.getText());
-//        cust.setState(state.getText());
-//        cust.setPostalCode(postCode.getText());
-//        cust.setCountryCode(counCode.getText());
-//        cust.setEmail(email.getText());
-//        cust.setPhone(phone.getText());
-        
-//        JOptionPane.showMessageDialog(null, infoPanel);
         cust.setCompanyName(JOptionPane.showInputDialog(null, "Please enter your Company's name: "));
         cust.setAddress1(JOptionPane.showInputDialog(null, "Please enter your Street Address: "));
         cust.setAddress2(JOptionPane.showInputDialog(null, "Please enter your Street Address line 2 (if applicable): "));
@@ -289,29 +237,22 @@ public class UI {//implements OrderingListener{
                 //wr.write(order.toString().getBytes());
                 //wr.flush();
                 //wr.close();
-                output.flush();
-                output.close();
-                int code = huc.getResponseCode();
-                System.out.println(code);
-                //input = huc.getInputStream();
+            output.flush();
+            output.close();
+            int code = huc.getResponseCode();
+            System.out.println(code);
+            input = huc.getInputStream();
 
-            //JsonReader reader = Json.createReader(input);
-            //JsonObject response = reader.readObject();
-            //orderNumber = response.getString("orderNumber");
-            System.out.println(orderNumber);
-            //input.close();
+            JsonReader reader = Json.createReader(input);
+            JsonObject response = reader.readObject();
+            orderNumber = response.getString("orderNumber");
+            //System.out.println(orderNumber);
+            input.close();
         } catch (MalformedURLException ex) {
             Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-    }
-
-    //@Override
-    public void packageOrdered(Package in, Customer customer) {
-        System.out.println("Package has been ordered: Confirmation number is ");
-    }
-    
+        JOptionPane.showMessageDialog(null, "Package Ordered, Your order number is: " + orderNumber);
+    }    
 }
