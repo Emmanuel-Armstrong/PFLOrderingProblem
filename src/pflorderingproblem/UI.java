@@ -25,6 +25,7 @@ import javax.swing.JTextArea;
 
 
 
+
 /**
  *
  * @author Emmanuel
@@ -34,15 +35,15 @@ public class UI {//implements OrderingListener{
     Package selected = null;
     Customer cust = null;
     String orderNumber = null;
+    
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        OrderingGUI gui = new OrderingGUI();
         UI ui = new UI();
-        ui.getPackages();
-        ui.createCustomer();
-        ui.placeOrder();
+        gui.setVisible(true);
     }
     
         //method to retrieve the list of available products from the API
@@ -137,21 +138,23 @@ public class UI {//implements OrderingListener{
         //method to create a new customer from input given by the user and store it in the Customer class.
         //In future versions this would allow us to store the information for future orders.
     public void createCustomer(){
-                
-        String firstName = JOptionPane.showInputDialog(null, "Please enter your first name: ");
-        String lastName = JOptionPane.showInputDialog(null, "Please enter your last name: ");
-        
-        cust = new Customer(firstName, lastName);
-        cust.setCompanyName(JOptionPane.showInputDialog(null, "Please enter your Company's name: "));
-        cust.setAddress1(JOptionPane.showInputDialog(null, "Please enter your Street Address: "));
-        cust.setAddress2(JOptionPane.showInputDialog(null, "Please enter your Street Address line 2 (if applicable): "));
-        cust.setCity(JOptionPane.showInputDialog(null, "Please enter your city: "));
-        cust.setState(JOptionPane.showInputDialog(null, "Please enter your State or its 2 letter abbreviation: "));
-        cust.setPostalCode(JOptionPane.showInputDialog(null, "Please enter your Postal Code: "));
-        cust.setCountryCode(JOptionPane.showInputDialog(null, "Please enter your Country: "));
-        cust.setEmail(JOptionPane.showInputDialog(null, "Please enter your Email Address: "));
-        cust.setPhone(JOptionPane.showInputDialog(null, "Please enter your phone number: "));
-        
+        //System.out.println(cust);
+       // gui.setVisible(true);
+          
+//        String firstName = JOptionPane.showInputDialog(null, "Please enter your first name: ");
+//        String lastName = JOptionPane.showInputDialog(null, "Please enter your last name: ");
+//        
+//        cust = new Customer(firstName, lastName);
+//        cust.setCompanyName(JOptionPane.showInputDialog(null, "Please enter your Company's name: "));
+//        cust.setAddress1(JOptionPane.showInputDialog(null, "Please enter your Street Address: "));
+//        cust.setAddress2(JOptionPane.showInputDialog(null, "Please enter your Street Address line 2 (if applicable): "));
+//        cust.setCity(JOptionPane.showInputDialog(null, "Please enter your city: "));
+//        cust.setState(JOptionPane.showInputDialog(null, "Please enter your State or its 2 letter abbreviation: "));
+//        cust.setPostalCode(JOptionPane.showInputDialog(null, "Please enter your Postal Code: "));
+//        cust.setCountryCode(JOptionPane.showInputDialog(null, "Please enter your Country: "));
+//        cust.setEmail(JOptionPane.showInputDialog(null, "Please enter your Email Address: "));
+//        cust.setPhone(JOptionPane.showInputDialog(null, "Please enter your phone number: "));
+//        
      
         
     }
@@ -212,7 +215,7 @@ public class UI {//implements OrderingListener{
                     builder3.add("itemFile", selected.getImageURL());
             arrBuilder.add(builder3);
             builder.add("items", arrBuilder);
-                    builder4.add("shippingSequenceNumber", 1);
+                    builder4.add("ShipmentSequenceNumber", 1);
                     builder4.add("firstName", cust.getFirstName());
                     builder4.add("lastName", cust.getLastName());
                     builder4.add("companyName", cust.getCompanyName());
